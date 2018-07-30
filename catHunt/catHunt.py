@@ -2,6 +2,7 @@ import pygame, sys, math
 from pygame.locals import *
 import random
 
+pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.init()
 
 FPS = 30
@@ -38,6 +39,13 @@ newFont = pygame.font.SysFont("comicsansms", 50)
 # Main Menu
 def main_menu():
 
+    try:
+        music = pygame.mixer.music.load("back.mp3")
+        music.set_volume(1.0)
+        pygame.mixer.music.play(-1)
+    except:
+        print("could not load or play soundfiles in 'data' folder :-(")
+
     menu=True
     selected="start"
 
@@ -56,7 +64,7 @@ def main_menu():
                 elif event.key==pygame.K_4:
                     pygame.quit()
                     quit()
- 
+
         # Main Menu UI
         DISPLAYSURF.fill(BLUE)
         titleFont = pygame.font.SysFont("comicsansms", 80)
